@@ -1,0 +1,149 @@
+.card {
+    opacity: 0;
+    animation: fadeUp 1s ease forwards;
+    animation-fill-mode: forwards;
+}
+
+.card-container .card:nth-child(1) {
+    animation-delay: 0.3s;
+}
+.card-container .card:nth-child(2) {
+    animation-delay: 0.6s;
+}
+.card-container .card:nth-child(3) {
+    animation-delay: 0.9s;
+}
+
+@keyframes fadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.main-content {
+    flex-grow: 1;
+    padding: 40px;
+    margin-left: 250px; 
+    color: #fff;
+    font-family: '', serif;
+}
+
+.title {
+    font-size: 36px;
+    color: cyan;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title span {
+    text-decoration: underline;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.card {
+    background-color: #2a2a2a;
+    padding: 20px;
+    width: 300px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px #00ffff60;
+    text-align: center;
+    margin-left: 2rem;
+}
+
+.org-image {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.card-title {
+    font-size: 18px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.card-desc {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ccc;
+    line-height: 1.2em;
+    max-height: 2.4em; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.card.expanded .card-desc {
+    max-height: none;
+    overflow: visible;
+}
+
+.read-more {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+.main-content {
+    margin-left: 0;
+    padding: 30px 20px;
+}
+
+.title {
+    font-size: 28px;
+    margin-bottom: 2rem;
+}
+
+.card-container {
+    gap: 20px;
+}
+
+.card {
+    width: 45%;
+    margin-left: 0;
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 16px;
+}
+
+.card-desc {
+    font-size: 13px;
+    line-height: 1.4em;
+    }
+}
+
+@media (max-width: 600px) {
+.title {
+    font-size: 24px;
+}
+
+.card {
+    width: 100%;
+}
+
+.card-title {
+    font-size: 15px;
+}
+
+.card-desc {
+    font-size: 12.5px;
+    }
+}
