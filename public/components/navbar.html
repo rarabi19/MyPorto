@@ -1,33 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Portfolio</title>
-  <link rel="stylesheet" href="styles.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
-<body>
-
-  <div class="hamburger" id="hamburger">
-    <div></div>
-    <div></div>
-    <div></div>
+<nav class="backdrop-blur-md bg-black/50 border-b border-white/10 w-full fixed top-0 left-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      <div class="flex-shrink-0 flex items-center gap-2">
+        <div class="w-8 h-8 bg-white text-black flex items-center justify-center font-bold text-xl rounded-sm">M</div>
+        <a href="index.html" class="text-white font-bold text-2xl tracking-widest uppercase">MyPorto</a>
+      </div>
+      <div class="hidden md:block">
+        <div class="ml-10 flex items-baseline space-x-6">
+          <a href="index.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">Home</a>
+          <a href="about.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">About</a>
+          <a href="project.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">Project</a>
+          <a href="sertifikat.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">Certificate</a>
+          <a href="organisasi.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">Organization</a>
+          <a href="galeri.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300">Gallery</a>
+          <a href="kontak.html" class="nav-btn text-gray-300 hover:text-white hover:bg-white/10 px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 border border-transparent hover:border-white/30">Contact</a>
+        </div>
+      </div>
+      <div class="-mr-2 flex md:hidden">
+        <button type="button" id="hamburger" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-white/10 focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
   </div>
 
-  <nav class="sidebar">
-    <h2 class="logo">MyPortfolio</h2>
-    <div class="nav-buttons">
-      <a href="index.html" class="nav-btn"><i class="fas fa-home"></i><span>Home</span></a>
-      <a href="about.html" class="nav-btn"><i class="fas fa-user"></i><span>About Me</span></a>
-      <a href="project.html" class="nav-btn"><i class="fas fa-folder-open"></i><span>Project</span></a>
-      <a href="sertifikat.html" class="nav-btn"><i class="fas fa-certificate"></i><span>Certificate</span></a>
-      <a href="organisasi.html" class="nav-btn"><i class="fas fa-users"></i><span>Organization</span></a>
-      <a href="galeri.html" class="nav-btn"><i class="fas fa-image"></i><span>Gallery</span></a>
-      <a href="kontak.html" class="nav-btn"><i class="fas fa-phone"></i><span>Contact</span></a>
+  <div class="sidebar hidden md:hidden absolute w-full bg-black/95 backdrop-blur-xl border-b border-white/10">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a href="index.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+      <a href="about.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">About</a>
+      <a href="project.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Project</a>
+      <a href="sertifikat.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Certificate</a>
+      <a href="organisasi.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Organization</a>
+      <a href="galeri.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Gallery</a>
+      <a href="kontak.html" class="nav-btn text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <script src="script.js"></script>
-</body>
-</html>
+<style>
+  .nav-btn.active {
+    color: var(--accent-primary, #00ff95);
+    background-color: rgba(0, 255, 149, 0.05);
+    border-bottom: 2px solid var(--accent-primary, #00ff95);
+    border-radius: 0;
+    text-shadow: 0 0 10px rgba(0, 255, 149, 0.3);
+  }
+  @media (max-width: 768px) {
+      .nav-btn.active {
+          border-left: 4px solid var(--accent-primary, #00ff95);
+          border-bottom: none;
+      }
+  }
+  .sidebar.open {
+    display: block;
+    animation: slideDown 0.3s ease-out;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>

@@ -1,44 +1,269 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MyPortfolio</title>
-    <link rel="stylesheet" href="public/css/navbar.css" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Haniva Azzahra — Frontend & AI Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css"/>
+    <link rel="stylesheet" href="public/css/style.css"/>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{background:var(--bg-black);color:var(--text-white);font-family:'Inter',sans-serif;overflow-x:hidden}
+        #particles-js{position:fixed;inset:0;z-index:0;pointer-events:none}
+        .main-content{position:relative;z-index:1}
+
+        /* Glitch Effect */
+        .glitch{position:relative;color:var(--text-white); font-weight: 900; letter-spacing: -0.02em; text-shadow: 0 0 15px rgba(255,255,255,0.2);}
+        .glitch::before,.glitch::after{content:attr(data-text);position:absolute;top:0;left:0;width:100%;height:100%;background:black;clip:rect(0,0,0,0);}
+        .glitch::before{left:3px;text-shadow:-2px 0 var(--accent-primary);animation:glitch-1 2s infinite linear alternate-reverse}
+        .glitch::after{left:-3px;text-shadow:2px 0 var(--accent-secondary);animation:glitch-2 3s infinite linear alternate-reverse}
+        @keyframes glitch-1{0%,100%{clip-path:inset(50% 0 30% 0);transform:skewX(0deg)}20%{clip-path:inset(10% 0 80% 0);transform:skewX(-2deg)}40%{clip-path:inset(70% 0 5% 0);transform:skewX(1deg)}}
+        @keyframes glitch-2{0%,100%{clip-path:inset(20% 0 60% 0);transform:skewX(0deg)}30%{clip-path:inset(80% 0 5% 0);transform:skewX(2deg)}60%{clip-path:inset(5% 0 70% 0);transform:skewX(-1deg)}}
+
+        /* Typing Cursor */
+        .typed-cursor{animation:blink 1s infinite; color: var(--accent-primary);}
+        @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+        /* Floating Badges */
+        .skill-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border:1px solid rgba(255,255,255,0.1);border-radius:100px;font-size:12px;font-weight:600;background:rgba(255,255,255,0.03);backdrop-filter:blur(10px);transition:all .3s ease;cursor:default}
+        .skill-badge:hover{background:rgba(255,255,255,0.1);border-color:var(--accent-primary);transform:translateY(-4px);box-shadow:0 8px 20px rgba(0, 255, 149, 0.15)}
+
+        /* Scan Line */
+        .scan-line{position:absolute;width:100%;height:2px;background:linear-gradient(90deg,transparent,var(--accent-primary),transparent);animation:scan 4s linear infinite;pointer-events:none}
+        @keyframes scan{0%{top:0;opacity:1}100%{top:100%;opacity:0}}
+
+        /* Profile Orb */
+        .profile-orb{position:relative}
+        .profile-orb::before{content:'';position:absolute;inset:-20px;background:conic-gradient(from 0deg,transparent,var(--accent-primary),transparent 60%);border-radius:50%;animation:spin 8s linear infinite; opacity: 0.3;}
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .profile-orb::after{content:'';position:absolute;inset:-4px;border:2px solid rgba(255,255,255,0.05);border-radius:50%;animation:pulse-border 3s ease-in-out infinite}
+        @keyframes pulse-border{0%,100%{border-color:rgba(255,255,255,0.05);box-shadow:0 0 20px rgba(0, 255, 149, 0.05)}50%{border-color:var(--accent-primary);box-shadow:0 0 40px rgba(0, 255, 149, 0.2)}}
+
+        /* Stat Cards */
+        .stat-card{border:1px solid rgba(255,255,255,0.05);background:rgba(255,255,255,0.02);backdrop-filter:blur(10px);border-radius:16px;padding:20px;text-align:center;transition:all .3s ease}
+        .stat-card:hover{border-color:var(--accent-secondary);background:rgba(255,255,255,0.05);transform:translateY(-5px);box-shadow:0 15px 30px rgba(0,0,0,0.4)}
+
+        /* CTA Button */
+        .cta-btn{position:relative;padding:14px 32px;font-weight:700;font-size:15px;letter-spacing:.5px;border:2px solid var(--accent-primary);border-radius:8px;overflow:hidden;transition:all .4s ease;display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--text-white)}
+        .cta-btn::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--accent-primary);transition:all .4s ease;z-index:-1}
+        .cta-btn:hover::before{left:0}
+        .cta-btn:hover{color:#000;box-shadow:0 0 30px rgba(0, 255, 149, 0.4)}
+        .cta-btn.secondary{border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.5)}
+        .cta-btn.secondary:hover{color:#000;border-color:var(--accent-secondary); background: var(--accent-secondary);}
+
+        /* Social Links */
+        .social-link{width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;transition:all .3s ease;color:rgba(255,255,255,0.4);text-decoration:none}
+        .social-link:hover{border-color:var(--accent-primary);color:var(--accent-primary);background:rgba(0, 255, 149, 0.05);transform:translateY(-4px);box-shadow:0 8px 20px rgba(0, 255, 149, 0.15)}
+
+        /* Scroll indicator */
+        .scroll-indicator{display:flex;flex-direction:column;align-items:center;gap:8px;animation:bounce 2s infinite}
+        .scroll-indicator .wheel{width:24px;height:38px;border:2px solid rgba(255,255,255,0.2);border-radius:12px;display:flex;justify-content:center;padding-top:6px}
+        .scroll-indicator .wheel::before{content:'';width:4px;height:8px;background:var(--accent-primary);border-radius:2px;animation:scroll-dot 2s infinite}
+        @keyframes scroll-dot{0%{transform:translateY(0);opacity:1}100%{transform:translateY(10px);opacity:0}}
+
+        /* Code snippet decoration */
+        .code-snippet{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,0.1);position:absolute;pointer-events:none;white-space:nowrap;animation:float-code 6s ease-in-out infinite}
+        @keyframes float-code{0%,100%{transform:translateY(0) rotate(-2deg);opacity:0.2}50%{transform:translateY(-15px) rotate(0deg);opacity:0.4}}
+
+        /* Navbar active */
+        .nav-btn.active{color:#fff;border-bottom:2px solid #fff;padding-bottom:2px}
+        @media(max-width:768px){.nav-btn.active{border-left:3px solid #fff;border-bottom:none;padding-left:8px}}
+    </style>
     <script defer src="public/js/navbar.js"></script>
-    <link rel="stylesheet" href="public/css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 <body>
-    <div class="container">
-        <div id="navbar">
-        </div>
+    <div id="particles-js"></div>
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
 
-    <main class="content" id="textContent">
-    <div class="animate-up">
-    <div class="hero-section">
-            <div class="text-content">
-                <h1 class="title">Haniva Azzahra Salsabila</h1>
-                <p class="subtitle">Junior Mobile Developer || UI/UX Enthusiast || Web Developer</p>
-                <p class="description">
-                    Mahasiswa aktif dengan antusiasme tinggi dalam merancang dan membangun<br>
-                    aplikasi mobile, web, serta antarmuka pengguna yang estetik dan fungsional.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.youtube.com/@RARABI-lu9fc" target="_blank"><img src="public/images/youtube.png" alt="YouTube"></a>
-                    <a href="https://github.com/rarabi19" target="_blank"><img src="public/images/github.png" alt="GitHub"></a>
-                    <a href="https://www.instagram.com/_azzahraa_19/" target="_blank"><img src="public/images/instagram.png" alt="Instagram"></a>
-                    <a href="https://www.linkedin.com/in/haniva-azzahra-3ab578241/" target="_blank"><img src="public/images/linkedin.png" alt="LinkedIn"></a>
+    <div class="main-content">
+        <div id="navbar"></div>
+
+        <main class="min-h-screen flex flex-col justify-center px-6 pt-28 pb-16">
+            <div class="max-w-7xl mx-auto w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+                    <!-- LEFT: Text Content -->
+                    <div class="space-y-8" data-aos="fade-right" data-aos-duration="800">
+                        <!-- Badge -->
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <span class="skill-badge text-green-300 border-green-400/30 bg-green-400/5">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                Available for work
+                            </span>
+                            <span class="skill-badge"><i class="fas fa-map-marker-alt text-xs"></i> Indonesia</span>
+                        </div>
+
+                        <!-- Main Heading -->
+                        <div>
+                            <p class="text-gray-500 font-mono text-sm mb-3">// hello_world.js</p>
+                            <h1 class="text-5xl md:text-7xl font-black leading-tight">
+                                <span class="glitch" data-text="Haniva">Haniva</span>
+                                <br/>
+                                <span class="text-white/90">Azzahra</span>
+                            </h1>
+                        </div>
+
+                        <!-- Typing role -->
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-px bg-white/40"></div>
+                            <p class="text-xl text-gray-300 font-medium">
+                                <span id="typed-text"></span><span class="typed-cursor text-white">|</span>
+                            </p>
+                        </div>
+
+                        <!-- Description -->
+                        <p class="text-gray-400 text-lg leading-relaxed max-w-xl">
+                            Merancang antarmuka yang <span class="text-white font-semibold">estetik & fungsional</span>, serta membangun solusi 
+                            <span class="text-white font-semibold">AI/ML</span> — dari chatbot pintar hingga sistem pengenalan wajah.
+                        </p>
+
+                        <!-- Skill Badges -->
+                        <div class="flex flex-wrap gap-2">
+                            <span class="skill-badge"><i class="fab fa-html5 text-orange-400 text-xs"></i> HTML/CSS</span>
+                            <span class="skill-badge"><i class="fab fa-js-square text-yellow-400 text-xs"></i> JavaScript</span>
+                            <span class="skill-badge"><i class="fab fa-laravel text-red-400 text-xs"></i> Laravel</span>
+                            <span class="skill-badge"><i class="fas fa-mobile-alt text-blue-400 text-xs"></i> Mobile Dev</span>
+                            <span class="skill-badge"><i class="fas fa-brain text-purple-400 text-xs"></i> Machine Learning</span>
+                            <span class="skill-badge"><i class="fab fa-python text-yellow-300 text-xs"></i> Python</span>
+                            <span class="skill-badge"><i class="fas fa-robot text-green-400 text-xs"></i> NLP / AI</span>
+                        </div>
+
+                        <!-- CTAs -->
+                        <div class="flex items-center gap-4 flex-wrap pt-2">
+                            <a href="#" class="cta-btn">
+                                <i class="fas fa-download text-sm"></i> Download CV
+                            </a>
+                            <a href="project.html" class="cta-btn secondary">
+                                <i class="fas fa-folder-open text-sm"></i> View Projects
+                            </a>
+                        </div>
+
+                        <!-- Social Links -->
+                        <div class="flex items-center gap-3 pt-2">
+                            <a href="https://github.com/rarabi19" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                            <a href="https://www.linkedin.com/in/haniva-azzahra-3ab578241/" target="_blank" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/_azzahraa_19/" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/@RARABI-lu9fc" target="_blank" class="social-link"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Visual -->
+                    <div class="flex flex-col items-center gap-8" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+                        <!-- Profile Image -->
+                        <div class="profile-orb relative">
+                            <div class="relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden border-2 border-white/10 bg-white/5">
+                                <div class="scan-line"></div>
+                                <img src="public/images/zahra.png" alt="Haniva Azzahra" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"/>
+                                <!-- Overlay grid -->
+                                <div class="absolute inset-0 opacity-20" style="background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:20px 20px"></div>
+                            </div>
+                        </div>
+
+                        <!-- Stats -->
+                        <div class="grid grid-cols-3 gap-4 w-full">
+                            <div class="stat-card" data-aos="zoom-in" data-aos-delay="400">
+                                <div class="text-3xl font-black text-white" id="stat-projects">0</div>
+                                <div class="text-xs text-gray-500 mt-1">Projects</div>
+                            </div>
+                            <div class="stat-card" data-aos="zoom-in" data-aos-delay="500">
+                                <div class="text-3xl font-black text-white" id="stat-certs">0</div>
+                                <div class="text-xs text-gray-500 mt-1">Certificates</div>
+                            </div>
+                            <div class="stat-card" data-aos="zoom-in" data-aos-delay="600">
+                                <div class="text-3xl font-black text-white" id="stat-orgs">0</div>
+                                <div class="text-xs text-gray-500 mt-1">Organizations</div>
+                            </div>
+                        </div>
+
+                        <!-- Code snippet floating -->
+                        <div class="relative w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 font-mono text-xs text-gray-400" data-aos="fade-up" data-aos-delay="700">
+                            <div class="flex gap-2 mb-3">
+                                <span class="w-3 h-3 rounded-full bg-red-500/60"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/60"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/60"></span>
+                            </div>
+                            <pre class="text-green-400/80 leading-relaxed overflow-x-auto"><span class="text-blue-400/80">const</span> haniva = {
+  <span class="text-yellow-300/80">role</span>: <span class="text-orange-300/80">"Frontend & AI Engineer"</span>,
+  <span class="text-yellow-300/80">skills</span>: [<span class="text-orange-300/80">"HTML"</span>, <span class="text-orange-300/80">"ML"</span>, <span class="text-orange-300/80">"NLP"</span>],
+  <span class="text-yellow-300/80">ai_projects</span>: [
+    <span class="text-orange-300/80">"Face Attendance"</span>,
+    <span class="text-orange-300/80">"RSJ Tampan Chatbot"</span>
+  ],
+  <span class="text-yellow-300/80">status</span>: <span class="text-green-400/80">"building..."</span> 🚀
+};</pre>
+                        </div>
+                    </div>
                 </div>
-                <a href="#" class="cv-button">Download Curriculum Vitae</a>
+
+                <!-- Scroll Indicator -->
+                <div class="flex justify-center mt-16">
+                    <div class="scroll-indicator opacity-50">
+                        <div class="wheel"></div>
+                        <span class="text-xs text-gray-500 font-mono">scroll</span>
+                    </div>
+                </div>
             </div>
-            <div class="profile-image">
-                <img src="public/images/zahra.png" alt="Profile Picture">
-            </div>
-            </div>
-        </div>
-</main>
-</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+        </main>
+    </div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+    // AOS Init
+    AOS.init({once:true,offset:50});
+
+    // Particles
+    particlesJS('particles-js',{
+        particles:{
+            number:{value:60,density:{enable:true,value_area:1000}},
+            color:{value:'#ffffff'},
+            shape:{type:'circle'},
+            opacity:{value:0.15,random:true,anim:{enable:true,speed:1,opacity_min:0.05}},
+            size:{value:2,random:true},
+            line_linked:{enable:true,distance:150,color:'#ffffff',opacity:0.05,width:1},
+            move:{enable:true,speed:1.5,direction:'none',random:true,straight:false,out_mode:'out'}
+        },
+        interactivity:{
+            detect_on:'canvas',
+            events:{onhover:{enable:true,mode:'grab'},onclick:{enable:true,mode:'push'},resize:true},
+            modes:{grab:{distance:200,line_linked:{opacity:0.2}},push:{particles_nb:3}}
+        },
+        retina_detect:true
+    });
+
+    // Typewriter
+    const roles=['Frontend Developer 🎨','UI/UX Enthusiast ✨','Mobile Developer 📱','ML Engineer 🤖','AI Builder 🧠'];
+    let ri=0,ci=0,del=false;
+    const el=document.getElementById('typed-text');
+    function type(){
+        const cur=roles[ri];
+        el.textContent=del?cur.substring(0,ci--):cur.substring(0,ci++);
+        if(!del&&ci>cur.length){del=true;setTimeout(type,1500);return}
+        if(del&&ci<0){del=false;ri=(ri+1)%roles.length;ci=0}
+        setTimeout(type,del?50:80);
+    }
+    type();
+
+    // Counter animation
+    function animateCount(el,target,suffix=''){
+        let start=0;
+        const step=Math.ceil(target/40);
+        const interval=setInterval(()=>{
+            start=Math.min(start+step,target);
+            el.textContent=start+(suffix);
+            if(start>=target)clearInterval(interval);
+        },40);
+    }
+    setTimeout(()=>{
+        animateCount(document.getElementById('stat-projects'),5,'+');
+        animateCount(document.getElementById('stat-certs'),6,'+');
+        animateCount(document.getElementById('stat-orgs'),3,'+');
+    },800);
+    </script>
 </body>
 </html>
